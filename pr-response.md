@@ -95,10 +95,15 @@ I agree with the maintainer’s reasoning that date-added order better matches h
 
 **What conflicted:**
 
+After running `git fetch origin` and `git rebase origin/main`, Git reported a conflict because the `main` branch had already migrated film IDs from integers to UUIDs while my feature branch still referenced the older integer-based implementation. During the rebase, I also encountered a conflict in `.gitignore`.
+
 **How I resolved it:**
+
+I resolved the `.gitignore` conflict by keeping the required ignore rules. I then updated the watchlist implementation to match the UUID-based models from `main`. This included restoring the `WatchlistEntry` model, changing `film_id` references from integer IDs to UUID strings, updating relationships in `models.py`, and modifying the watchlist test to use a UUID value for the nonexistent film instead of an integer.
 
 **How I verified no conflict remains:**
 
+I searched the project to ensure no watchlist code still referenced integer film IDs, confirmed there were no remaining Git conflict markers, ran the full test suite with `pytest tests/ -v`, and verified that the rebased branch contains no merge commits.
 ---
 
 ## PR Description
