@@ -19,9 +19,15 @@ Used a project-wide search to confirm there were no remaining references to `sav
 
 ## Comment 2 — Deduplication
 
+
 **What I did:**
 
+Added a duplicate-entry check to `add_to_watchlist()`. Before creating a new `WatchlistEntry`, the service queries for an existing entry with the same `user_id` and `film_id`. If one exists, it raises `AlreadyInWatchlistError` instead of creating another database record. I followed the same pattern used by `add_to_collection()`.
+
 **How I verified:**
+
+Reviewed the query to confirm that deduplication uses both `user_id` and `film_id`. I also confirmed that the duplicate check runs before the new entry is added and committed. A dedicated duplicate test will be added while addressing Comment 3.
+
 
 ---
 
