@@ -35,7 +35,22 @@ Reviewed the query to confirm that deduplication uses both `user_id` and `film_i
 
 **What I did:**
 
+Created `tests/test_watchlist.py` and added
+`test_add_to_watchlist_nonexistent_film_raises()`. I used
+`test_add_to_collection_nonexistent_film_raises()` from
+`tests/test_collection.py` as the model and followed the same in-memory app
+fixture, sample-user fixture, application-context structure, and
+`pytest.raises()` assertion pattern.
+
+The watchlist branch still uses integer film IDs, so the test uses a
+nonexistent integer ID rather than the UUID value used by the collection test.
+
 **How I verified:**
+
+Ran `pytest tests/test_watchlist.py -v` and confirmed the new test passed. Then
+ran `pytest tests/ -v` to confirm the full test suite still passed after the
+rename, deduplication, and missing-test changes.
+
 
 ---
 
