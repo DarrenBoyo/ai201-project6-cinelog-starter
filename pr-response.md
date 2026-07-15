@@ -58,9 +58,18 @@ rename, deduplication, and missing-test changes.
 
 **My position:**
 
+I would change the default from `public=True` to `public=False`.
+
 **Reasoning:**
 
+A watchlist reflects a user’s personal interests and future viewing plans, so I think privacy should be the safer default. Users may add films casually without realizing that the entry is visible to others. Defaulting to private reduces the chance of accidental sharing and gives users explicit control over when they make an item public.
+
+This choice optimizes for user trust and informed consent. A user can still choose to make a watchlist entry public, but that action should be intentional rather than automatic.
+
 **Tradeoff acknowledged:**
+
+The tradeoff is that a private default may reduce social engagement and make the feature feel less community-oriented. A `public=True` default could encourage discovery, recommendations, and interaction between users with less friction. However, I believe requiring an explicit opt-in for visibility is a better balance because it avoids exposing user activity unexpectedly.
+
 
 ---
 
@@ -68,9 +77,17 @@ rename, deduplication, and missing-test changes.
 
 **My position:**
 
+I would change the watchlist sort order from alphabetical by film title to date added, with the most recently added film appearing first.
+
 **Reasoning:**
 
+A watchlist is primarily a queue of films the user intends to watch. In that context, the most recently added items are often the most relevant because they reflect the user’s latest interests. Sorting by `date_added` descending also matches the behavior of `get_collection()`, which makes the two features more consistent and predictable.
+
+Alphabetical sorting is useful when a user already knows the title they are looking for, but it removes the history of when items were saved. For a growing watchlist, users are more likely to want quick access to films they added recently than to scan the list alphabetically.
+
 **Engagement with reviewer's point:**
+
+I agree with the maintainer’s reasoning that date-added order better matches how users interact with a watchlist. The feature represents saved intent rather than a static catalog, so recency provides more meaningful ordering than title. Alphabetical sorting could still be offered later as an optional filter or sort control, but I would use newest-first as the default.
 
 ---
 
